@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subject_teacher', function (Blueprint $table) {
+        Schema::create('subject_student', function (Blueprint $table) {
             $table->foreignId('subject_id');
             $table->foreignId('student_id');
             $table->float('mid_mark');
