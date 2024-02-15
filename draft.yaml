@@ -1,0 +1,156 @@
+models:
+  Student:
+    name: string:100
+    password: string:100
+    email: string:100
+    phone_number: string:100
+    relationships:
+      hasMany:
+        - Subject
+        - Lecture
+
+  Teacher:
+    name: string:100
+    password: string:100
+    email: string:100
+    phone_number: string:100
+    relationships:
+      hasMany:
+        - Subject
+        - Lecture
+
+  Semester:
+    name: string:100
+    major: string:100
+
+  Subject:
+    name: string:100
+    relationships:
+      belongsTo: Semester
+      belongsToMany: Teacher
+
+  Group:
+    name: string:100
+    relationships:
+      belongsTo: Semester
+
+  Lecture:
+    start_time: timestamp
+    end_time: timestamp
+    day_of_week: string:100
+    relationships:
+      belongsTo:
+        - Subject
+        - ClassRoom
+        - Group
+        - Teacher
+
+  ClassRoom:
+    name: string:100
+    relationships:
+      belongsToMany: Lecture
+
+  # Resource:
+  #   name: string:100
+  #   playStorePath: string:255
+  #   appleStorePath: string:255
+  #   description: string:200
+# controllers:
+#   Teacher:
+#     index:
+#       query: all
+#       render: post.index with:posts
+
+#     store:
+#       validate: title, content
+#       save: post
+#       send: ReviewNotification to:post.author with:post
+#       dispatch: SyncMedia with:post
+#       fire: NewPost with:post
+#       flash: post.title
+#       redirect: post.index
+
+controllers:
+  Api\Student:
+    index:
+      query: all
+      resource: students
+    store:
+      validate: name
+      save: Student
+      respond: 201
+    show:
+      find: student.id
+      resource: student
+
+  Api\Teacher:
+    index:
+      query: all
+      resource: teachers
+    store:
+      validate: name
+      save: Teacher
+      respond: 201
+    show:
+      find: teacher.id
+      resource: teacher
+
+  Api\Semester:
+    index:
+      query: all
+      resource: Semester
+    store:
+      validate: name
+      save: Semester
+      respond: 201
+    show:
+      find: semester.id
+      resource: semester
+
+  Api\Subject:
+    index:
+      query: all
+      resource: subjects
+    show:
+      find: subject.id
+      resource: subject
+    store:
+      validate: name
+      save: subject
+      respond: 201
+
+  Api\Group:
+    index:
+      query: all
+      resource: groups
+    show:
+      find: group.id
+      resource: group
+    store:
+      validate: name
+      save: group
+      respond: 201
+
+  Api\Lecture:
+    index:
+      query: all
+      resource: lecture
+    show:
+      find: lecture.id
+      resource: lecture
+    store:
+      validate: name
+      save: lecture
+      respond: 201
+
+  Api\ClassRoom:
+    index:
+      query: all
+      resource: classRoom
+    show:
+      find: classRoom.id
+      resource: classRoom
+    store:
+      validate: name
+      save: classRoom
+      respond: 201
