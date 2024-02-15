@@ -17,6 +17,7 @@ class Student extends Model
      */
     protected $fillable = [
         'name',
+        'user_name',
         'password',
         'email',
         'phone_number',
@@ -38,6 +39,7 @@ class Student extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'user_name'=> 'integer',
     ];
 
     public function lectures(): HasMany

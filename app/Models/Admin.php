@@ -18,6 +18,7 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'user_name',
         'password',
     ];
 
@@ -37,5 +38,6 @@ class Admin extends Authenticatable
      */
     protected $casts = [
         'id' => 'integer',
+        'user_name'=> 'integer',
     ];
 }

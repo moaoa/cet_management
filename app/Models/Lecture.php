@@ -20,9 +20,9 @@ class Lecture extends Model
         'start_time',
         'end_time',
         'day_of_week',
-        'subject',
-        'class_room',
-        'group',
+        'subject_id',
+        'class_room_id',
+        'group_id',
         'teacher_id',
     ];
 
@@ -33,9 +33,9 @@ class Lecture extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'subject'=> 'integer',
-        'class_room' => 'integer',
-        'group' => 'integer',
+        'subject_id'=> 'integer',
+        'class_room_id' => 'integer',
+        'group_id' => 'integer',
         'teacher_id' => 'integer',
         'start_time' => 'timestamp',
         'end_time' => 'timestamp',
