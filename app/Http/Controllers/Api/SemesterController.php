@@ -11,21 +11,21 @@ use Illuminate\Http\Response;
 
 class SemesterController extends Controller
 {
-    public function index(Request $request): Response
+    public function index(Request $request)
     {
         $semesters = Semester::all();
 
-        return new SemesterResource($Semester);
+        return new SemesterResource($semesters);
     }
 
-    public function store(SemesterStoreRequest $request): Response
+    public function store(SemesterStoreRequest $request)
     {
         $semester = Semester::create($request->validated());
 
         return response()->noContent(201);
     }
 
-    public function show(Request $request, Semester $semester): Response
+    public function show(Request $request, $id)
     {
         $semester = Semester::find($id);
 

@@ -11,21 +11,21 @@ use Illuminate\Http\Response;
 
 class TeacherController extends Controller
 {
-    public function index(Request $request): Response
+    public function index(Request $request)
     {
         $teachers = Teacher::all();
 
         return new TeacherResource($teachers);
     }
 
-    public function store(TeacherStoreRequest $request): Response
+    public function store(TeacherStoreRequest $request)
     {
         $teacher = Teacher::create($request->validated());
 
         return response()->noContent(201);
     }
 
-    public function show(Request $request, Teacher $teacher): Response
+    public function show(Request $request, $id)
     {
         $teacher = Teacher::find($id);
 

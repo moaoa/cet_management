@@ -11,21 +11,21 @@ use Illuminate\Http\Response;
 
 class GroupController extends Controller
 {
-    public function index(Request $request): Response
+    public function index(Request $request)
     {
         $groups = Group::all();
 
         return new GroupResource($groups);
     }
 
-    public function show(Request $request, Group $group): Response
+    public function show(Request $request, Group $id)
     {
         $group = Group::find($id);
 
         return new GroupResource($group);
     }
 
-    public function store(GroupStoreRequest $request): Response
+    public function store(GroupStoreRequest $request)
     {
         $group = Group::create($request->validated());
 

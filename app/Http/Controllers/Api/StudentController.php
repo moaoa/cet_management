@@ -11,7 +11,7 @@ use Illuminate\Http\Response;
 
 class StudentController extends Controller
 {
-    public function index(Request $request): Response
+    public function index(Request $request)
     {
         $students = Student::all();
 
@@ -25,7 +25,7 @@ class StudentController extends Controller
         return response()->noContent(201);
     }
 
-    public function show(Request $request, $id): Response
+    public function show(Request $request, $id)
     {
         $student = Student::find($id);
 

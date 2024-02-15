@@ -11,14 +11,14 @@ use Illuminate\Http\Response;
 
 class LectureController extends Controller
 {
-    public function index(Request $request): Response
+    public function index(Request $request)
     {
         $lectures = Lecture::all();
 
-        return new LectureResource($lecture);
+        return new LectureResource($lectures);
     }
 
-    public function show(Request $request, Lecture $lecture): Response
+    public function show(Request $request, Lecture $id)
     {
         $lecture = Lecture::find($id);
 

@@ -11,14 +11,14 @@ use Illuminate\Http\Response;
 
 class ClassRoomController extends Controller
 {
-    public function index(Request $request): Response
+    public function index(Request $request)
     {
-        $classRooms = ClassRoom::all();
+        $classRoom = ClassRoom::all();
 
         return new ClassRoomResource($classRoom);
     }
 
-    public function show(Request $request, ClassRoom $classRoom): Response
+    public function show(Request $request, $id)
     {
         $classRoom = ClassRoom::find($id);
 
