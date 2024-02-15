@@ -1,0 +1,48 @@
+created:
+    - app/Http/Controllers/Api/StudentController.php
+    - app/Http/Controllers/Api/TeacherController.php
+    - app/Http/Controllers/Api/SemesterController.php
+    - app/Http/Controllers/Api/SubjectController.php
+    - app/Http/Controllers/Api/GroupController.php
+    - app/Http/Controllers/Api/LectureController.php
+    - app/Http/Controllers/Api/ClassRoomController.php
+    - database/factories/StudentFactory.php
+    - database/factories/TeacherFactory.php
+    - database/factories/SemesterFactory.php
+    - database/factories/SubjectFactory.php
+    - database/factories/GroupFactory.php
+    - database/factories/LectureFactory.php
+    - database/factories/ClassRoomFactory.php
+    - database/migrations/2024_02_15_094105_create_students_table.php
+    - database/migrations/2024_02_15_094106_create_teachers_table.php
+    - database/migrations/2024_02_15_094107_create_semesters_table.php
+    - database/migrations/2024_02_15_094108_create_subjects_table.php
+    - database/migrations/2024_02_15_094109_create_groups_table.php
+    - database/migrations/2024_02_15_094110_create_lectures_table.php
+    - database/migrations/2024_02_15_094111_create_class_rooms_table.php
+    - database/migrations/2024_02_15_094112_create_subject_teacher_table.php
+    - database/migrations/2024_02_15_094113_create_class_room_lecture_table.php
+    - app/Models/Student.php
+    - app/Models/Teacher.php
+    - app/Models/Semester.php
+    - app/Models/Subject.php
+    - app/Models/Group.php
+    - app/Models/Lecture.php
+    - app/Models/ClassRoom.php
+    - tests/Feature/Http/Controllers/Api/StudentControllerTest.php
+    - tests/Feature/Http/Controllers/Api/TeacherControllerTest.php
+    - tests/Feature/Http/Controllers/Api/SemesterControllerTest.php
+    - tests/Feature/Http/Controllers/Api/SubjectControllerTest.php
+    - tests/Feature/Http/Controllers/Api/GroupControllerTest.php
+    - tests/Feature/Http/Controllers/Api/LectureControllerTest.php
+    - tests/Feature/Http/Controllers/Api/ClassRoomControllerTest.php
+updated:
+    - routes/web.php
+models:
+    Student: { name: 'string:100', password: 'string:100', email: 'string:100', phone_number: 'string:100', relationships: { hasMany: 'Subject Lecture' } }
+    Teacher: { name: 'string:100', password: 'string:100', email: 'string:100', phone_number: 'string:100', relationships: { hasMany: 'Subject Lecture' } }
+    Semester: { name: 'string:100', major: 'string:100' }
+    Subject: { name: 'string:100', relationships: { belongsTo: Semester, belongsToMany: Teacher } }
+    Group: { name: 'string:100', relationships: { belongsTo: Semester } }
+    Lecture: { start_time: timestamp, end_time: timestamp, day_of_week: 'string:100', relationships: { belongsTo: 'Subject ClassRoom Group Teacher' } }
+    ClassRoom: { name: 'string:100', relationships: { belongsToMany: Lecture } }
