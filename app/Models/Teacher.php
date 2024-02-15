@@ -17,7 +17,7 @@ class Teacher extends Model
      */
     protected $fillable = [
         'name',
-        'user_name',
+        'ref_number',
         'password',
         'email',
         'phone_number',
@@ -39,7 +39,7 @@ class Teacher extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'user_name'=> 'integer',
+        'ref_number'=> 'integer',
     ];
 
     public function subject(): HasMany
