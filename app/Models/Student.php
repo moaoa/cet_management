@@ -40,8 +40,12 @@ class Student extends Model
         'id' => 'integer',
     ];
 
-    public function subjectLectures(): HasMany
+    public function lectures(): HasMany
     {
-        return $this->hasMany(SubjectLecture::class);
+        return $this->hasMany(Lecture::class);
+    }
+    public function subjects(): HasMany
+    {
+        return $this->hasMany(Subject::class);
     }
 }

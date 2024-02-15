@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Lecture extends Model
 {
@@ -19,7 +20,10 @@ class Lecture extends Model
         'start_time',
         'end_time',
         'day_of_week',
-        'subject_class_room_group_teacher_id',
+        'subject',
+        'class_room',
+        'group',
+        'teacher_id',
     ];
 
     /**
@@ -29,13 +33,33 @@ class Lecture extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'subject'=> 'integer',
+        'class_room' => 'integer',
+        'group' => 'integer',
+        'teacher_id' => 'integer',
         'start_time' => 'timestamp',
         'end_time' => 'timestamp',
-        'subject_class_room_group_teacher_id' => 'integer',
     ];
-
-    public function subjectClassRoomGroupTeacher(): BelongsTo
+    
+    public function subject(): HasOne
     {
-        return $this->belongsTo(SubjectClassRoomGroupTeacher::class);
+        return $this->hasOne(Subject::class);
     }
+
+    public function teacher(): HasOne
+    {
+        return $this->hasOne(Teacher::class);
+    }
+
+    public function classRoom(): HasOne
+    {
+        return $this->hasOne(ClassRoom::class);
+    }
+
+    public function group(): HasOne
+    {
+        return $this->hasOne(Group::class);
+    }
+
+    
 }
