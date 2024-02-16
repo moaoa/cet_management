@@ -17,6 +17,7 @@ class Semester extends Model
     protected $fillable = [
         'name',
         'major',
+        'order',
     ];
 
     /**
@@ -26,6 +27,7 @@ class Semester extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'order' => 'integer',
     ];
    
 }
