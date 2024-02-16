@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use \App\Enums\Major;
 use Illuminate\Database\Seeder;
 use \App\Models\Semester;
 
@@ -17,13 +17,13 @@ class SemesterSeeder extends Seeder
         //
         Semester::factory()->create([
             'name' => 'الفصل الأول',
-            'major' => 1,
+            'major' => Major::GENERAL->value,
             'order' => 1
         ]);
 
         Semester::factory()->create([
             'name' => 'الفصل الثاني',
-            'major' => 1,
+            'major' => Major::GENERAL->value,
             'order' => 2
         ]);
 
@@ -31,25 +31,25 @@ class SemesterSeeder extends Seeder
         foreach($numberLabels as $index => $label){
             Semester::factory()->create([
                 'name' => 'الفصل ' . $label,
-                'major' => 2,
+                'major' => Major::SOFTWARE_ENG->value,
                 'order' => $index + 3
             ]);
         }
 
-        // telecomunication
+        // telecommunication
         foreach($numberLabels as $index => $label){
             Semester::factory()->create([
                 'name' => 'الفصل ' . $label,
-                'major' => 3,
+                'major' => Major::TELECOMMUNICATION->value,
                 'order' => $index + 3
             ]);
         }
 
-        // telecomunication
+        // control
         foreach($numberLabels as $index => $label){
             Semester::factory()->create([
                 'name' => 'الفصل ' . $label,
-                'major' => 4,
+                'major' => Major::CONTROL->value,
                 'order' => $index + 3
             ]);
         }

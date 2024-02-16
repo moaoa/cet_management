@@ -18,7 +18,6 @@ class Subject extends Model
      */
     protected $fillable = [
         'name',
-        'semester_id',
     ];
 
     /**
@@ -28,7 +27,6 @@ class Subject extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'semester_id' => 'integer',
     ];
 
     public function semester(): BelongsTo
