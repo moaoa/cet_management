@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\StudentStoreRequest;
-use App\Http\Resources\Api\StudentResource;
+use App\Http\Requests\Api\UserAuthRequest;
 use App\Models\Student;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
 {
@@ -15,20 +15,30 @@ class StudentController extends Controller
     {
         $students = Student::all();
 
-        return new StudentResource($students);
+        return response()->json($students);
     }
 
-    public function store(StudentStoreRequest $request): Response
+    public function store(StudentStoreRequest $request)
     {
         $student = Student::create($request->validated());
 
-        return response()->noContent(201);
+        return response()->json($student);
     }
 
     public function show(Request $request, $id)
     {
         $student = Student::find($id);
 
-        return new StudentResource($student);
+        return response()->json($student);
     }
+    // public function login(UserAuthRequest $request)
+    // {
+    //     $request->validated($request->all());
+
+    //     if (!Auth::attempt([$request->only('ref_number','password')])) {
+    //         return response()->json(['Credentials do not match'],401); 
+    //     }
+    // }
+    
+    
 }

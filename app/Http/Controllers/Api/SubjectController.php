@@ -15,20 +15,20 @@ class SubjectController extends Controller
     {
         $subjects = Subject::all();
 
-        return new SubjectResource($subjects);
+        return response()->json($subjects);
     }
 
     public function show(Request $request,  $id)
     {
         $subject = Subject::find($id);
 
-        return new SubjectResource($subject);
+        return  response()->json($subject);
     }
 
     public function store(SubjectStoreRequest $request)
     {
         $subject = Subject::create($request->validated());
 
-        return response()->noContent(201);
+        return  response()->json($subject);;
     }
 }

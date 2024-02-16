@@ -15,20 +15,20 @@ class GroupController extends Controller
     {
         $groups = Group::all();
 
-        return new GroupResource($groups);
+        return  response()->json($groups);
     }
 
     public function show(Request $request, Group $id)
     {
         $group = Group::find($id);
 
-        return new GroupResource($group);
+        return response()->json($group);
     }
 
     public function store(GroupStoreRequest $request)
     {
         $group = Group::create($request->validated());
 
-        return response()->noContent(201);
+        return response()->json($group);
     }
 }

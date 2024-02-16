@@ -15,20 +15,20 @@ class TeacherController extends Controller
     {
         $teachers = Teacher::all();
 
-        return new TeacherResource($teachers);
+        return response()->json($teachers);
     }
 
     public function store(TeacherStoreRequest $request)
     {
         $teacher = Teacher::create($request->validated());
 
-        return response()->noContent(201);
+        return response()->json($teacher);
     }
 
     public function show(Request $request, $id)
     {
         $teacher = Teacher::find($id);
 
-        return new TeacherResource($teacher);
+        return response()->json($teacher);
     }
 }

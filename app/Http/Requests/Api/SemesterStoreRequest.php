@@ -21,6 +21,7 @@ class SemesterStoreRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:100'],
+            'major' => ['required', 'string', 'max:100'],
         ];
     }
 }

@@ -15,20 +15,20 @@ class LectureController extends Controller
     {
         $lectures = Lecture::all();
 
-        return new LectureResource($lectures);
+        return  response()->json( $lectures);
     }
 
     public function show(Request $request, Lecture $id)
     {
         $lecture = Lecture::find($id);
 
-        return new LectureResource($lecture);
+        return  response()->json( $lecture);
     }
 
-    public function store(LectureStoreRequest $request): Response
+    public function store(LectureStoreRequest $request)
     {
         $lecture = Lecture::create($request->validated());
 
-        return response()->noContent(201);
+        return  response()->json( $lecture);
     }
 }

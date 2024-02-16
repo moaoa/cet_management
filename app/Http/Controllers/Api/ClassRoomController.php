@@ -13,22 +13,22 @@ class ClassRoomController extends Controller
 {
     public function index(Request $request)
     {
-        $classRoom = ClassRoom::all();
+        $classRooms = ClassRoom::all();
 
-        return new ClassRoomResource($classRoom);
+        return response()->json($classRooms);
     }
 
     public function show(Request $request, $id)
     {
         $classRoom = ClassRoom::find($id);
 
-        return new ClassRoomResource($classRoom);
+        return response()->json($classRoom);
     }
 
-    public function store(ClassRoomStoreRequest $request): Response
+    public function store(ClassRoomStoreRequest $request)
     {
         $classRoom = ClassRoom::create($request->validated());
 
-        return response()->noContent(201);
+        return response()->json($classRoom);
     }
 }

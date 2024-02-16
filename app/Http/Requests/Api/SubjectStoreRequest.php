@@ -21,6 +21,7 @@ class SubjectStoreRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:100'],
+            'subject_id' =>['required', 'integer', 'exists:subjects,id'],
         ];
     }
 }

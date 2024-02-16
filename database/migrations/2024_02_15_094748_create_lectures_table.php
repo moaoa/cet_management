@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamp('start_time');
             $table->timestamp('end_time');
-            $table->string('day_of_week', 100);
+            $table->integer('day_of_week');
             $table->foreignId('subject_id');
             $table->foreignId('class_room_id');
             $table->foreignId('group_id');

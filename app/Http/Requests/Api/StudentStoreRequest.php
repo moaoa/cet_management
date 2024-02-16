@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Validation\Rules;
 class StudentStoreRequest extends FormRequest
 {
     /**
@@ -20,7 +20,11 @@ class StudentStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:100'],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required','string','max:255','unique:students'],
+            'ref_number' => ['required', 'integer' ,'min:0','unique:students'],
+            'password' => ['required','confirmed', Rules\Password::defaults()],
+            'phone_number'=>['nullable','string','max:15'],
         ];
     }
 }

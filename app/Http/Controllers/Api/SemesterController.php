@@ -15,20 +15,20 @@ class SemesterController extends Controller
     {
         $semesters = Semester::all();
 
-        return new SemesterResource($semesters);
+        return  response()->json($semesters);
     }
 
     public function store(SemesterStoreRequest $request)
     {
         $semester = Semester::create($request->validated());
 
-        return response()->noContent(201);
+        return  response()->json($semester);
     }
 
     public function show(Request $request, $id)
     {
         $semester = Semester::find($id);
 
-        return new SemesterResource($semester);
+        return  response()->json($semester);
     }
 }

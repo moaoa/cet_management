@@ -22,8 +22,11 @@ class LectureStoreRequest extends FormRequest
         return [
             'start_time' => ['required'],
             'end_time' => ['required'],
-            'day_of_week' => ['required', 'string', 'max:100'],
-            'subject_class_room_group_teacher_id' => ['required', 'integer', 'exists:subject_class_room_group_teachers,id'],
+            'day_of_week' => ['required', 'integer', 'min:1','max:6'],
+            'subject_id' =>['required', 'integer', 'exists:subjects,id'],
+            'class_room_id'=>['required', 'integer', 'exists:class_rooms,id'],
+            'group_id'=>['required', 'integer', 'exists:groups,id'],
+            'teacher_id' => ['required', 'integer', 'exists:teachers,id'],
         ];
     }
 }
