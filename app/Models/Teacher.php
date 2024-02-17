@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Teacher extends Model
@@ -42,12 +43,12 @@ class Teacher extends Model
         'ref_number'=> 'integer',
     ];
 
-    public function subject(): HasMany
+    public function subjects(): BelongsToMany
     {
-        return $this->hasMany(Subject::class);
+        return $this->belongsToMany(Subject::class);
     }
 
-    public function lecture(): HasMany
+    public function lectures(): HasMany
     {
         return $this->hasMany(Lecture::class);
     }
