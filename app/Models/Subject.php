@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Subject extends Model
 {
@@ -18,7 +19,6 @@ class Subject extends Model
      */
     protected $fillable = [
         'name',
-        'semester_id',
     ];
 
     /**
@@ -28,7 +28,6 @@ class Subject extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'semester_id' => 'integer',
     ];
 
     public function semester(): BelongsTo
