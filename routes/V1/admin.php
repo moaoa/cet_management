@@ -13,4 +13,5 @@ use App\Http\Controllers\AssignSubjectToTeacher;
 
 
 // TODO: TO BE AUTHENTICATED AND AUTHORIZED ONLY FOR ADMINS
-Route::post('/teacher-to-subject-attachment',AssignSubjectToTeacher::class);
+Route::post('/teacher-to-subject-attachment',[AdminController::class, 'assignSubjectToTeacher']);
+Route::post('/student-assignment',[AdminController::class, 'assignStudentToSemester']);

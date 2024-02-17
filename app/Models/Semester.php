@@ -32,9 +32,9 @@ class Semester extends Model
         'order' => 'integer',
     ];
 
-    public function subjects(): BelongsToMany
+    public function subjects(): HasMany
     {
-        return $this->belongsToMany(Subject::class);
+        return $this->hasMany(Subject::class);
     }
    
 }

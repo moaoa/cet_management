@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('subject_student', function (Blueprint $table) {
             $table->foreignId('subject_id');
             $table->foreignId('student_id');
-            $table->float('mid_mark');
-            $table->float('final_mark');
-            $table->boolean('passed');
+            $table->float('mid_mark')->default(0);
+            $table->float('final_mark')->default(0);
+            $table->boolean('passed')->default(false);
         });
     }
 
