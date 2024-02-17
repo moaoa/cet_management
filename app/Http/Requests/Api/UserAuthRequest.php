@@ -22,8 +22,8 @@ class UserAuthRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'ref_number' => ['required', 'integer' ],
-            'password' => ['required','string', 'min:6'],
+            'ref_number' => ['required','integer' ],
+            'password' => ['required','string','min:6'],
         ];
     }
 }
