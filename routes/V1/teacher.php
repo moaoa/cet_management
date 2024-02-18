@@ -12,3 +12,4 @@ Route::post('/register',[TeacherController::class,'store']);
 //protected
 Route::middleware('auth:sanctum')->get('/showAll',[TeacherController::class,'index']);
 Route::middleware('auth:sanctum')->get('/show/{id}',[TeacherController::class,'show']);
+Route::middleware('auth:sanctum')->get('/lectures/{id}',[TeacherController::class,'teacherWeeklyLectures']);

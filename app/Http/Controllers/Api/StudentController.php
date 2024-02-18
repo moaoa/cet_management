@@ -48,11 +48,12 @@ class StudentController extends Controller
     {
         $request->validated($request->all());
         $student = Student::where('ref_number',$request->ref_number)->first();
-        $token = $student->createToken('Api token of '. $student->name)->plainTextToken;
 
         if (!$student || ! Hash::check($request->password , $student->password)) {
             return response()->json(['Credentials do not match'],401); 
         }else{
+            
+            $token = $student->createToken('Api token of '. $student->name)->plainTextToken;
             return response()->json([
                 $student,
                 $token,

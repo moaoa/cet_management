@@ -26,4 +26,21 @@ class AdminController extends Controller
             'token'=>$token,
         ]);
     }
+
+    public function login(UserAuthRequest $request)
+    {
+        $request->validated($request->all());
+        $admin = Admin::where('ref_number',$request->ref_number)->first();
+
+        if (!$admin || ! Hash::check($request->password , $admin->password)) {
+            return response()->json(['Credentials do not match'],401); 
+        }else{
+            
+            $token = $admin->createToken('Api token of '. $admin->name)->plainTextToken;
+            return response()->json([
+                $admin,
+                $token,
+            ],200); 
+        }
+    }
 }
