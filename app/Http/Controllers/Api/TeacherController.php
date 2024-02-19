@@ -7,6 +7,7 @@ use App\Http\Requests\Api\TeacherStoreRequest;
 use App\Http\Requests\Api\UserAuthRequest;
 use App\Models\Lecture;
 use App\Models\Lecture_Student;
+use App\Models\Subject;
 use App\Models\Teacher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -106,7 +107,6 @@ class TeacherController extends Controller
                 'note'=> ['nullable','string','max:255'],
             ]);
 
-            $hi=Carbon::now()->getTranslatedShortDayName();
             $currentDate = Carbon::now()->toDateString();
             // $currentDateTime = new DataTime();
             // $formattedDate = $currentDateTime->format('Y-m-d H:i:s');
@@ -132,4 +132,29 @@ class TeacherController extends Controller
 
     }
     
+    public function teacherSubjects($teacher_id)
+    {
+        try {
+        
+            $teacher =Teacher::where('id',$teacher_id)->first();
+            
+            if (!$teacher) {
+                # code...
+                return 'لايوجد استاذ بهذا الرقم';
+            }
+            
+            $subjects = $teacher->subjects()->where('teacher_id',$teacher_id)->get();
+            if ($subjects->isEmpty()) {
+                # code...
+                return 'الاستاذ لايدرس اي مادة';
+            }
+
+            return response()->json($subjects);
+            
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $th;
+        }
+        
+    }
 }

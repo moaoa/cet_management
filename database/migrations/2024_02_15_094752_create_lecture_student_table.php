@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('student_id');
             $table->integer('Status');
             $table->string('note',100);
-            $table->string('date');
+            $table->date('date');
             $table->timestamps();
             $table->unique(['lecture_id','student_id','date']);
         });
