@@ -19,3 +19,4 @@ Route::middleware('auth:sanctum')->get('/lectureStudents/{id}',[LectureControlle
 Route::middleware('auth:sanctum')->post('/attendence',[TeacherController::class,'takeTheAttendence']);
 Route::middleware('auth:sanctum')->get('/teacherSubjects/{id}',[TeacherController::class,'teacherSubjects']);
 Route::middleware('auth:sanctum')->get('/subjectStudents/{id}',[SubjectController::class,'subjectStudents']);
+Route::middleware('auth:sanctum')->post('/addingStudentGrades',[TeacherController::class,'addingStudentGrades']);

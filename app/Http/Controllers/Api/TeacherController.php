@@ -7,10 +7,12 @@ use App\Http\Requests\Api\TeacherStoreRequest;
 use App\Http\Requests\Api\UserAuthRequest;
 use App\Models\Lecture;
 use App\Models\Lecture_Student;
+use App\Models\Student;
 use App\Models\Subject;
 use App\Models\Teacher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class TeacherController extends Controller
@@ -140,7 +142,7 @@ class TeacherController extends Controller
             
             if (!$teacher) {
                 # code...
-                return 'لايوجد استاذ بهذا الرقم';
+                return 'لا يوجد استاذ بهذا الرقم';
             }
             
             $subjects = $teacher->subjects()->where('teacher_id',$teacher_id)->get();
@@ -148,7 +150,7 @@ class TeacherController extends Controller
                 # code...
                 return 'الاستاذ لايدرس اي مادة';
             }
-
+            
             return response()->json($subjects);
             
         } catch (\Throwable $th) {
@@ -156,5 +158,38 @@ class TeacherController extends Controller
             return $th;
         }
         
+    }
+
+    public function addingStudentGrades(Request $request)
+    {
+        $request->validate([
+            'subject_id'=>'required|exists:subjects,id',
+            'student_id' => 'required|exists:students,id',
+            'mid_mark'=> ['required','integer','min:0','max:40 '],
+            'final_mark'=> ['required','integer','min:0','max:60 '],
+        ]);
+       
+        $theStudentHaveTheSubject =DB::table('subject_student')
+        ->where('student_id', $request->student_id)
+        ->where('subject_id', $request->subject_id)->exists();
+
+        $queryStatus = DB::table('subject_student')
+        ->where('student_id', $request->student_id)
+        ->where('subject_id', $request->subject_id)
+        ->update([
+            'mid_mark'=> $request->mid_mark,
+            'final_mark'=>$request->final_mark,
+        ]);
+
+        if ($queryStatus) {
+            # code...
+            return 'تم تسجيل درجة الطالب';
+        }elseif ($theStudentHaveTheSubject) {
+            # code...
+            return 'تم اضافة هذه الدرجة بالفعل';
+        }else{
+            return 'هذا الطالب لا يدرس هذه المادة';
+        }
+
     }
 }
