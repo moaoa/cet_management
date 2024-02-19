@@ -31,4 +31,20 @@ class SubjectController extends Controller
 
         return  response()->json($subject);;
     }
+
+    public function subjectStudents($subject_id)
+    {
+        $subject = Subject::where('id',$subject_id)->first();
+        
+        if (!$subject) {
+            # code...
+            return 'لاتوجد مادة بهذا الرقم';
+        }
+
+        $students = $subject->students()->where('subject_id',$subject_id)->get();
+
+        return response()->json($students);
+
+
+    }
 }
