@@ -15,3 +15,4 @@ Route::middleware('auth:sanctum')->get('/showAll',[TeacherController::class,'ind
 Route::middleware('auth:sanctum')->get('/show/{id}',[TeacherController::class,'show']);
 Route::middleware('auth:sanctum')->get('/lectures/{id}',[TeacherController::class,'teacherWeeklyLectures']);
 Route::middleware('auth:sanctum')->get('/lectureStudents/{id}',[LectureController::class,'lectureStudents']);
+Route::middleware('auth:sanctum')->post('/attendence',[TeacherController::class,'takeTheAttendence']);

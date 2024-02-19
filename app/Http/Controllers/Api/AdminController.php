@@ -108,15 +108,16 @@ class AdminController extends Controller
 
             $teacher->save();
           } else {
-            return 'teacher already has this subject';
+            return 'الاستاذ يدرس هذه المادة بالفعل';
           }
 
-          return 'subject was assigned to teacher';
+          return 'تم اضافة المادة للاستاذ';
        } catch (\Throwable $th) {
         //throw $th;
         return $th;
        }
     }
+    
     public function assignStudentToSemester(Request $request){
        $data = $request->validate([
         'semester_id' => 'required|exists:semesters,id',

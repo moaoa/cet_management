@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\TeacherStoreRequest;
 use App\Http\Requests\Api\UserAuthRequest;
 use App\Models\Lecture;
+use App\Models\Lecture_Student;
 use App\Models\Teacher;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -70,7 +72,7 @@ class TeacherController extends Controller
 
         if (!$teacherExists) {
             # code...
-            return 'invalid teacher';
+            return ' لا يوجد استاذ بهذا الرقم';
 
         }else{
             try {
@@ -82,7 +84,7 @@ class TeacherController extends Controller
                     return response()->json($lectures);
                     
                 }else{
-                    return 'the teacher does not have leactures...';
+                    return 'لاتوجد محاضرات لهذا الاستاذ';
                 }
 
             } catch (\Throwable $th) {
@@ -91,7 +93,43 @@ class TeacherController extends Controller
             }
 
         }
-        
+    }
+
+    public function takeTheAttendence(Request $request)
+    {
+        try {
+            //code...
+            $request->validate([
+                'lecture_id'=>'required|exists:lectures,id',
+                'student_id' => 'required|exists:students,id',
+                'status'=> ['required','integer','min:1','max:3 '],
+                'note'=> ['nullable','string','max:255'],
+            ]);
+
+            $hi=Carbon::now()->getTranslatedShortDayName();
+            $currentDate = Carbon::now()->toDateString();
+            // $currentDateTime = new DataTime();
+            // $formattedDate = $currentDateTime->format('Y-m-d H:i:s');
+            // return response()->json([
+            //      $currentDate
+            // ]);
+            
+            $lecture_student = Lecture_Student::create([
+                'lecture_id'=>$request->lecture_id,
+                'student_id'=>$request->student_id,
+                'status'=>$request->status,
+                'note'=>$request->note,
+                'date'=>$currentDate,
+            ]);
+    
+        } catch (\Throwable $th) {
+            //throw $th;
+            return 'لقد تم تسجيل حضور هذا الطالب بالفعل';            
+        }
+       
+        return 'تمت عملية تسجيل حضور الطالب بنجاح';
+
+
     }
     
 }

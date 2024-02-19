@@ -38,7 +38,7 @@ class LectureController extends Controller
         $lectureExists = Lecture::where('id',$lecture_id)->exists();
         if(!$lectureExists)
         {
-            return 'there is no lecture';
+            return 'لاتوجد محاضرة بهذا الرقم';
         } else {
             # code...
             try {
@@ -50,7 +50,7 @@ class LectureController extends Controller
                 if(!$groupStudents->isEmpty()){
                     return response()->json($groupStudents);
                 }
-                return 'there is no group ....';
+                return 'لاتوجد مجموعة بهذا الرقم';
 
             } catch (\Throwable $th) {
                 //throw $th;
