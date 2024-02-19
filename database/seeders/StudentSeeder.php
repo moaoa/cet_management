@@ -69,7 +69,8 @@ class StudentSeeder extends Seeder
                 'ref_number' => str_pad(random_int(0, 9999), 4, '0', STR_PAD_LEFT),
                 'email'=> $faker->email(),
                 'phone_number'=> $faker->phoneNumber(),
-                'password' =>  Hash::make('password')
+                'password' =>  Hash::make('password'),
+                'group_id'=> random_int(1,15),
             ]);
         }
     }
