@@ -105,28 +105,35 @@ class TeacherController extends Controller
             $request->validate([
                 'lecture_id'=>'required|exists:lectures,id',
                 'student_id' => 'required|exists:students,id',
-                'status'=> ['required','integer','min:1','max:3 '],
+                'status'=> ['required','integer','min:0','max:2 '],
                 'note'=> ['nullable','string','max:255'],
             ]);
 
             $currentDate = Carbon::now()->toDateString();
-            // $currentDateTime = new DataTime();
-            // $formattedDate = $currentDateTime->format('Y-m-d H:i:s');
-            // return response()->json([
-            //      $currentDate
-            // ]);
-            
+
+            $thisLectureSubject=Lecture::where('id',$request->lecture_id)->value('subject_id');
+   
             $lecture_student = Lecture_Student::create([
                 'lecture_id'=>$request->lecture_id,
                 'student_id'=>$request->student_id,
+                'subject_id'=>$thisLectureSubject,
                 'status'=>$request->status,
                 'note'=>$request->note,
                 'date'=>$currentDate,
             ]);
-    
+
+            $TheRatioCount =  DB::table('subject_student')
+            ->where('student_id', $request->student_id)
+            ->where('subject_id', $thisLectureSubject)
+            ->update([
+                'absence'=>$request->status == 0 ? DB::raw('absence + 1') : DB::raw('absence'),
+                'total_lectures'=>DB::raw('total_lectures + 1'),
+            ]);
+            
         } catch (\Throwable $th) {
             //throw $th;
-            return 'لقد تم تسجيل حضور هذا الطالب بالفعل';            
+            // return 'لقد تم تسجيل حضور هذا الطالب بالفعل'. $thisLectureSubject;
+            return $th;            
         }
        
         return 'تمت عملية تسجيل حضور الطالب بنجاح';

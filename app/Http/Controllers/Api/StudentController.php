@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\StudentStoreRequest;
 use App\Http\Requests\Api\UserAuthRequest;
 use App\Models\Lecture;
+use App\Models\Lecture_Student;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -97,5 +98,4 @@ class StudentController extends Controller
         return $lectureRecords;
     }
     
-    
-}
+    }
