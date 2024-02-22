@@ -60,8 +60,13 @@ class StudentController extends Controller
             
             $token = $student->createToken('Api token of '. $student->name)->plainTextToken;
             return response()->json([
-                $student,
-                $token,
+                "id"=> $student->id,
+                "name" => $student->name,
+                "group" => $student->group_id,
+                "ref_number"=>$student->ref_number,
+                "email"=>$student->email,
+                "phone_number"=>$student->phone_number,
+                "token"=>$token,
             ],200); 
         }
     }
@@ -98,4 +103,12 @@ class StudentController extends Controller
         return $lectureRecords;
     }
     
+    public function updateStudent(Request $request)
+    {
+        $request->validate([
+            // 'student_id'
+        ]);
+    }
+
+
     }
