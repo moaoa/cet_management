@@ -19,6 +19,7 @@ class Subject extends Model
      */
     protected $fillable = [
         'name',
+        'semester_id'
     ];
 
     /**

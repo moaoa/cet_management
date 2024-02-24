@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('lectures', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('start_time');
-            $table->timestamp('end_time');
+            $table->string('start_time');
+            $table->string('end_time');
             $table->integer('day_of_week');
             $table->foreignId('subject_id');
             $table->foreignId('class_room_id');
