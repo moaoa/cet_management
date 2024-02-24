@@ -7,9 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Group extends Model
+class Lecture_Student extends Model
 {
     use HasFactory;
+
+    protected $table ='lecture_student';
 
     /**
      * The attributes that are mass assignable.
@@ -17,8 +19,12 @@ class Group extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
-        'semester_id',
+        'lecture_id',
+        'subject_id',
+        'student_id',
+        'status',
+        'note',
+        'date'
     ];
 
     /**
@@ -28,15 +34,10 @@ class Group extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'semester_id' => 'integer',
+        'student_id' => 'integer',
+        'lecture_id' => 'integer',
+        'subject_id' => 'integer',
+
     ];
 
-    public function semester(): BelongsTo
-    {
-        return $this->belongsTo(Semester::class);
-    }
-    public function students():HasMany
-    {
-        return $this->hasMany(Student::class);
-    }
 }

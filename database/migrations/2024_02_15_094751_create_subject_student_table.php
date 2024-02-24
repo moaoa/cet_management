@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Validation\Rules\Unique;
 
 return new class extends Migration
 {
@@ -16,7 +17,10 @@ return new class extends Migration
             $table->foreignId('student_id');
             $table->float('mid_mark')->default(0);
             $table->float('final_mark')->default(0);
+            $table->integer('absence')->default(0);
+            $table->integer('total_lectures')->default(0);
             $table->boolean('passed')->default(false);
+            $table->unique(['subject_id','student_id']);
         });
     }
 

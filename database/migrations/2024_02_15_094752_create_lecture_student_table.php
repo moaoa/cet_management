@@ -13,9 +13,13 @@ return new class extends Migration
     {
         Schema::create('lecture_student', function (Blueprint $table) {
             $table->foreignId('lecture_id');
+            $table->foreignId('subject_id');
             $table->foreignId('student_id');
             $table->integer('Status');
             $table->string('note',100);
+            $table->date('date');
+            $table->timestamps();
+            $table->unique(['lecture_id','student_id','date']);
         });
     }
 
