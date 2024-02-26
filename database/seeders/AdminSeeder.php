@@ -27,9 +27,7 @@ class AdminSeeder extends Seeder
 
             Admin::create([
                 'name' => $name,
-                'ref_number' => str_pad(random_int(0, 9999), 4, '0', STR_PAD_LEFT),
-                'email' => 'admin@gmail.com',
-                'phone_number' => $faker->phoneNumber(),
+                'ref_number' => 1111,                 'phone_number' => $faker->phoneNumber(),
                 'password' =>  Hash::make('password'),
             ]);
         }
