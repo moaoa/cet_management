@@ -27,7 +27,7 @@ class AdminSeeder extends Seeder
 
             Admin::create([
                 'name' => $name,
-                'ref_number' => 1111,                 'phone_number' => $faker->phoneNumber(),
+                'ref_number' => 1111,
                 'password' =>  Hash::make('password'),
             ]);
         }
