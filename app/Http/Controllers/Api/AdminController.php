@@ -88,7 +88,7 @@ class AdminController extends Controller
         ]);
 
         if (!$data) {
-            return 'الرجاء إدخال بيانات صحيحة';
+            return response()->json(['message' => 'الرجاء إدخال بيانات صحيحة'], 400);
         }
 
         $subjects = json_decode($request->subjects, true) ?? [];
