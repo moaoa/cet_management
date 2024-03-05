@@ -200,7 +200,7 @@ class AdminController extends Controller
         Lecture::create([
             'start_time' => $request->start_time,
             'end_time' => $request->end_time,
-            'day_of_week' => WeekDays::byName($request->day_of_week),
+            'day_of_week'=>$request->day_of_week,
             'subject_id' => $request->subject_id,
             'class_room_id' => $request->class_room_id,
             'group_id' => $request->group_id,

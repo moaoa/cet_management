@@ -62,9 +62,13 @@ class TeacherController extends Controller
             
             $token = $teacher->createToken('Api token of '. $teacher->name)->plainTextToken;
             return response()->json([
-                $teacher,
-                $token,
-            ],200); 
+                "id"=> $teacher->id,
+                "name" => $teacher->name,
+                "ref_number"=>$teacher->ref_number,
+                "email"=>$teacher->email,
+                "phone_number"=>$teacher->phone_number,
+                "token"=>$token,
+            ],200);  
         }
     }
 
@@ -80,11 +84,17 @@ class TeacherController extends Controller
         }else{
             try {
             
-                $lectures = Lecture::where('teacher_id',$teacher_id)->orderBy('day_of_week','asc')->get();
+                $lectures = Lecture::where('teacher_id',$teacher_id)->get();
+
+                $lectureRecords = DB::table('lectures')
+                ->join('subjects', 'lectures.subject_id', '=', 'subjects.id')
+                ->select('lectures.id','start_time','end_time','day_of_week','subjects.name')
+                ->where('lectures.teacher_id',$teacher_id)
+                ->get();
 
                 if (!$lectures->isEmpty()) {
                     # code...
-                    return response()->json($lectures);
+                    return response()->json($lectureRecords);
                     
                 }else{
                     return 'لاتوجد محاضرات لهذا الاستاذ';
@@ -116,7 +126,6 @@ class TeacherController extends Controller
             $lecture_student = Lecture_Student::create([
                 'lecture_id'=>$request->lecture_id,
                 'student_id'=>$request->student_id,
-                'subject_id'=>$thisLectureSubject,
                 'status'=>$request->status,
                 'note'=>$request->note,
                 'date'=>$currentDate,
@@ -132,8 +141,7 @@ class TeacherController extends Controller
             
         } catch (\Throwable $th) {
             //throw $th;
-            // return 'لقد تم تسجيل حضور هذا الطالب بالفعل'. $thisLectureSubject;
-            return $th;            
+            return 'لقد تم تسجيل حضور هذا الطالب بالفعل';
         }
        
         return 'تمت عملية تسجيل حضور الطالب بنجاح';

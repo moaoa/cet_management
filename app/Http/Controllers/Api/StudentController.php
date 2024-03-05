@@ -90,6 +90,7 @@ class StudentController extends Controller
             'lectures.start_time',
             'lectures.end_time',
             'lectures.day_of_week', 
+            'subjects.id as subject_id',
             'subjects.name as subject_name', 
             'teachers.name as teacher_name',
             'class_rooms.name as class_room')

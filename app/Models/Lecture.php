@@ -37,8 +37,6 @@ class Lecture extends Model
         'class_room_id' => 'integer',
         'group_id' => 'integer',
         'teacher_id' => 'integer',
-        'start_time' => 'timestamp',
-        'end_time' => 'timestamp',
     ];
     
     public function subject(): HasOne

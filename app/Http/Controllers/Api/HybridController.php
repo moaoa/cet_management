@@ -22,7 +22,7 @@ class HybridController extends Controller
         ->join('subjects','subjects.id','=','subject_student.subject_id')
         ->where('subject_student.student_id',$student_id)
         ->where('subject_student.passed',false)
-        ->select('name',DB::raw('(absence/total_lectures)*100 as ratio'))
+        ->select('subject_id','name', DB::raw('COALESCE(ROUND((absence / total_lectures) * 100), 0) as ratio'))
         ->get();
         
         return $absenceRatio;

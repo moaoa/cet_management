@@ -14,7 +14,9 @@ Route::post('/register',[StudentController::class,'store']);
 //protected
 Route::middleware('auth:sanctum')->get('/showAll',[StudentController::class,'index']);
 Route::middleware('auth:sanctum')->get('/show/{id}',[StudentController::class,'show']);
-Route::middleware('auth:sanctum')->get('/Schedules/{id}',[StudentController::class,'LectureSchedules']);
-Route::middleware('auth:sanctum')->get('/absence/{id}',[HybridController::class,'absenceRatio']);
-Route::middleware('auth:sanctum')->get('/grades/{id}',[HybridController::class,'studentGrades']);
+Route::get('/Schedules/{id}',[StudentController::class,'LectureSchedules']);
+Route::get('/absence/{id}',[HybridController::class,'absenceRatio']);
+Route::get('/grades/{id}',[HybridController::class,'studentGrades']);
 
+Route::get('/absence/{id}',[HybridController::class,'absenceRatio']);
+Route::get('/grades/{id}',[HybridController::class,'studentGrades']);

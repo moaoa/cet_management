@@ -14,9 +14,9 @@ Route::post('/register',[TeacherController::class,'store']);
 //protected
 Route::middleware('auth:sanctum')->get('/showAll',[TeacherController::class,'index']);
 Route::middleware('auth:sanctum')->get('/show/{id}',[TeacherController::class,'show']);
-Route::middleware('auth:sanctum')->get('/lectures/{id}',[TeacherController::class,'teacherWeeklyLectures']);
-Route::middleware('auth:sanctum')->get('/lectureStudents/{id}',[LectureController::class,'lectureStudents']);
-Route::middleware('auth:sanctum')->post('/attendence',[TeacherController::class,'takeTheAttendence']);
-Route::middleware('auth:sanctum')->get('/teacherSubjects/{id}',[TeacherController::class,'teacherSubjects']);
-Route::middleware('auth:sanctum')->get('/subjectStudents/{id}',[SubjectController::class,'subjectStudents']);
-Route::middleware('auth:sanctum')->post('/addingStudentGrades',[TeacherController::class,'addingStudentGrades']);
+Route::get('/lectures/{id}',[TeacherController::class,'teacherWeeklyLectures']);
+Route::get('/lectureStudents/{id}',[LectureController::class,'lectureStudents']);
+Route::post('/attendence',[TeacherController::class,'takeTheAttendence']);
+Route::get('/teacherSubjects/{id}',[TeacherController::class,'teacherSubjects']);
+Route::get('/subjectStudents/{id}',[SubjectController::class,'subjectStudents']);
+Route::post('/addingStudentGrades',[TeacherController::class,'addingStudentGrades']);
