@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('password', 100);
             $table->string('email', 100);
             $table->string('phone_number', 100);
-            $table->foreignId('group_id');
+            $table->foreignId('group_id')->nullable();
             $table->timestamps();
         });
     }

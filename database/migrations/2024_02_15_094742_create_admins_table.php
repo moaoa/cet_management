@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('ref_number');
             $table->string('password', 100);
+            $table->string('name', 100);
             $table->timestamps();
         });
     }
