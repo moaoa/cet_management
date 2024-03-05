@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Teacher;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use Illuminate\Support\Facades\Hash;
@@ -103,7 +104,15 @@ class TeacherSeeder extends Seeder
         foreach($teachers as $teacherName){
             $faker = Faker::create();
 
-            \App\Models\Teacher::create([
+            Teacher::create([
+                'name' => 'م.احمد قريش',
+                'ref_number' => '1111',
+                'email'=> $faker->email(),
+                'phone_number'=> $faker->phoneNumber(),
+                'password' =>  Hash::make('password')
+            ]);
+
+            Teacher::create([
                 'name' => $teacherName,
                 'ref_number' => str_pad(random_int(0, 9999), 4, '0', STR_PAD_LEFT),
                 'email'=> $faker->email(),

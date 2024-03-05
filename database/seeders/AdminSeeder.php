@@ -23,7 +23,12 @@ class AdminSeeder extends Seeder
 
 
         foreach ($names as $name) {
-            $faker = Faker::create();
+            // $faker = Faker::create();
+            Admin::create([
+                'name' => 'م. معاذ بن طاهر',
+                'ref_number' => 1111,
+                'password' =>  Hash::make('password'),
+            ]);
 
             Admin::create([
                 'name' => $name,

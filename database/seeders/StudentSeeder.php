@@ -64,6 +64,15 @@ class StudentSeeder extends Seeder
         foreach($names as $name){
             $faker = Faker::create();
 
+
+            Student::create([
+                'name' => 'م.رحيم ديهوم',
+                'ref_number' => '1111',
+                'email'=> $faker->email(),
+                'phone_number'=> $faker->phoneNumber(),
+                'password' =>  Hash::make('password')
+            ]);
+
             Student::create([
                 'name' => $name,
                 'ref_number' => str_pad(random_int(0, 9999), 4, '0', STR_PAD_LEFT),
