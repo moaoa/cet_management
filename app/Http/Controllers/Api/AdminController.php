@@ -45,8 +45,10 @@ class AdminController extends Controller
 
         $token = $admin->createToken('Api token of ' . $admin->name)->plainTextToken;
         return response()->json([
-            $admin,
-            $token,
+            'id' => $admin->id,
+            'name' => $admin->name,
+            'ref_number'=> $admin->ref_number,
+            'token' => $token,
         ], 200);
     }
 
