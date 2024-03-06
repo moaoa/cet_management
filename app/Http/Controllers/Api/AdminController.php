@@ -13,6 +13,7 @@ use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Enums\WeekDays;
+use App\Models\Group;
 
 class AdminController extends Controller
 {
@@ -57,6 +58,7 @@ class AdminController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'phone_number' => 'required',
+            'group_id' => 'required|exists:groups,id'
         ]);
 
         if (!$data) {
@@ -68,13 +70,42 @@ class AdminController extends Controller
             'password' => Hash::make($request->password),
             'name' => $request->name,
             'email' => $request->email,
-            'phone_number' => $request->phone_number
+            'phone_number' => $request->phone_number,
+            'group_id' => $request->group_id
         ]);
-
 
         $student->save();
 
+        $group = Group::find($request->group_id);
+
+        $this->assignStudentToSemester(
+            new Request([
+                'semester_id' => $group->semester_id,
+                'student_id' => $student->id, 
+            ])
+        );
+
         return response()->json($student);
+    }
+    public function addGroup(Request $request)
+    {
+        $data = $request->validate([
+            'semester_id' => 'required|exists:semesters,id',
+            'name' => 'required',
+        ]);
+
+        if (!$data) {
+            return response()->json(['message' => 'الرجاء إدخال بيانات صحيحة'], 400);
+        }
+
+        $group = Group::create([
+            'name' => $request->name,
+            'semester_id' => $request->semester_id
+        ]);
+
+        $group->save();
+
+        return response()->json($group);
     }
     public function addTeacher(Request $request)
     {

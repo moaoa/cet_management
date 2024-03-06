@@ -24,6 +24,7 @@ class Student extends Model
         'password',
         'email',
         'phone_number',
+        'group_id'
     ];
 
     /**
