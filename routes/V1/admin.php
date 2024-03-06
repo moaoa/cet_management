@@ -23,7 +23,7 @@ Route::post('/student-assignment', [AdminController::class, 'assignStudentToSeme
 Route::post('/teachers', [AdminController::class, 'addTeacher']);
 Route::post('/students', [AdminController::class, 'addStudent']);
 Route::post('/lectures', [AdminController::class, 'addLecture']);
-Route::post('/teacher-to-subject-attachment', [AdminController::class, 'assignSubjectToTeacher']);
+Route::post('/teacher-to-subject-attachment', [AdminController::class, 'assignSubjectsToTeacher']);
 Route::post('/student-assignment', [AdminController::class, 'assignStudentToSemester']);
 
 

@@ -82,21 +82,20 @@ class StudentController extends Controller
 
         $studentGroup = Student::where('id',$student_id)->value('group_id');
         
+        // $lecture = Lecture::where('group_id',$studentGroup)->get();
         $lectureRecords = DB::table('lectures')
         ->join('subjects', 'lectures.subject_id', '=', 'subjects.id')
         ->join('teachers', 'lectures.teacher_id', '=', 'teachers.id')
-        ->join('class_rooms', 'lectures.class_room_id', '=', 'class_rooms.id')
         ->select(
             'lectures.start_time',
             'lectures.end_time',
             'lectures.day_of_week', 
             'subjects.id as subject_id',
             'subjects.name as subject_name', 
-            'teachers.name as teacher_name',
-            'class_rooms.name as class_room')
+            'teachers.name as teacher_name')
         ->where('lectures.group_id', $studentGroup)
         ->get();
-         
+        
         if ($lectureRecords->isEmpty()) {
             # code...
             return 'لاتوجد محاضرات لهذا الطالب';

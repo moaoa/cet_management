@@ -91,13 +91,13 @@ class AdminController extends Controller
             return response()->json(['message' => 'الرجاء إدخال بيانات صحيحة'], 400);
         }
 
-        $subjects = json_decode($request->subjects, true) ?? [];
+        // $subjects = json_decode($request->subjects, true) ?? [];
 
-        $matchedSubjects = Subject::whereIn('id', $subjects)->get();
+        // $matchedSubjects = Subject::whereIn('id', $subjects)->get();
 
-        if ($matchedSubjects != null &&  count($matchedSubjects) !== count($subjects)) {
-            return response()->json(['message' => 'الرجاء إدخال المواد بشكل صخيخ'], 400);
-        }
+        // if ($matchedSubjects != null &&  count($matchedSubjects) !== count($subjects)) {
+        //     return response()->json(['message' => 'الرجاء إدخال المواد بشكل صخيخ'], 400);
+        // }
 
         $teacher = Teacher::create([
             'ref_number' => $request->ref_number,
@@ -108,9 +108,9 @@ class AdminController extends Controller
             'phone_number' => $request->phone_number
         ]);
 
-        if ($matchedSubjects != null &&  count($matchedSubjects) === count($subjects)) {
-            $teacher->subjects()->attach($matchedSubjects);
-        }
+        // if ($matchedSubjects != null &&  count($matchedSubjects) === count($subjects)) {
+        //     $teacher->subjects()->attach($matchedSubjects);
+        // }
 
         $teacher->save();
 
