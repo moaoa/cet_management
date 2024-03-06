@@ -149,13 +149,10 @@ class AdminController extends Controller
     }
     public function assignSubjectsToTeacher(Request $request)
     {
-        $data = $request->validate([
+        $request->validate([
             'teacher_id' => 'required|exists:teachers,id',
+            'subjects' => 'required'
         ]);
-
-        if (!$data) {
-            return 'إدخال غير صحيخ';
-        }
 
         try {
             $subjects = json_decode($request->subjects, true) ?? [];
@@ -171,7 +168,6 @@ class AdminController extends Controller
             if ($matchedSubjects != null && count($matchedSubjects) === count($subjects)) {
                 $teacher->subjects()->attach($subjects);
             }
-
 
             $teacher->save();
 
