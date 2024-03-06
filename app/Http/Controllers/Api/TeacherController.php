@@ -39,8 +39,12 @@ class TeacherController extends Controller
         $token = $teacher->createToken('Api token of '. $teacher->name)->plainTextToken;
         
         return response()->json([
-            $teacher,
-            'token'=>$token,
+            "id"=> $teacher->id,
+            "name" => $teacher->name,
+            "ref_number"=>$teacher->ref_number,
+            "email"=>$teacher->email,
+            "phone_number"=>$teacher->phone_number,
+            "token"=>$token,
         ]);
     }
 
