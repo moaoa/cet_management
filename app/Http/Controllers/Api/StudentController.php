@@ -98,7 +98,7 @@ class StudentController extends Controller
         
         if ($lectureRecords->isEmpty()) {
             # code...
-            return 'لاتوجد محاضرات لهذا الطالب';
+            return response()->json(['message' => 'لاتوجد محاضرات لهذا الطالب'], 400);
         }
         return $lectureRecords;
     }
